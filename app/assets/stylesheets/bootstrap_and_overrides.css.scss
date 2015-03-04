@@ -1,0 +1,21 @@
+@import "bootstrap";
+@import "bootstrap-responsive";
+
+/* fix infowindow */
+#map img {
+    max-width: none;
+}
+
+/* Room for infowindow's close x */
+#playground_form {
+    margin-top: 1.5em;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+}
+
+#contextual-panel {
+    font-size:120%;
+    line-height:1.5em;
+}

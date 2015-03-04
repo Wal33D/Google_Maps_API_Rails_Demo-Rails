@@ -1,4 +1,4 @@
-﻿class PlaygroundsController < ApplicationController
+class PlaygroundsController < ApplicationController
   
   before_action :set_playground, only: [:show, :edit, :update, :destroy]
   
