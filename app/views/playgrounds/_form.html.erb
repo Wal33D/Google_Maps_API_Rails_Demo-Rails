@@ -1,0 +1,36 @@
+<%= form_for @playground, :html => { :id => 'playground_form' }, :remote => true do |f| %>
+
+  <% if @playground.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@playground.errors.count, "error") %> prohibited this playground from being saved:</h2>
+
+      <ul>
+      <% @playground.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.text_field :name %>
+  </div>
+  
+  <div class="field">
+    <%= f.select(:sport, Playground::SPORTS, {:include_blank => h('<Please select sport>')}) %>
+  </div>
+  
+  <%= f.hidden_field :latitude %>
+  <%= f.hidden_field :longitude %>
+  <%= f.hidden_field :street_number %>
+  <%= f.hidden_field :route %>
+  <%= f.hidden_field :city %>
+  <%= f.hidden_field :country %>
+  <%= f.hidden_field :postal_code %>
+  
+  <%= f.submit class: "btn btn-lg btn-primary" %>
+  
+<% end %>
+
+
+

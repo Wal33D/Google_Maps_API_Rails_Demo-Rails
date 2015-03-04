@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong> 
+  <%= @playground.name %>
+</p>
+
+<p>
+  <strong>Sport:</strong> 
+  <%= @playground.sport %>
+</p>
+
+<p>
+  <strong>Street number:</strong>
+  <%= @playground.street_number %>
+</p>
+<p>
+  <strong>Route:</strong>
+  <%= @playground.route %>
+</p>
+<p>
+  <strong>City:</strong>
+  <%= @playground.city %>
+</p>
+<p>
+  <strong>Country:</strong>
+  <%= @playground.country %>
+</p>
+<p>
+  <strong>Postal code:</strong>
+  <%= @playground.postal_code %>
+</p>
+
+<%= link_to 'Edit', edit_playground_path(@playground), class: "btn btn-lg btn-primary", :remote =>true  %>
+<%= link_to raw('Destroy <i class="icon-trash"></i>'), @playground, class: "btn btn-lg", method: "delete", data: { confirm: 'Are you sure?' }, :remote =>true %>

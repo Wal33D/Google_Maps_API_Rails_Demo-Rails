@@ -1,0 +1,11 @@
+<% if params[:id] %>
+    // Clear the marker itself
+    clearMarkerById(<%=params[:id]%>);
+    alert_user("<%= j(raw(exception.message)) %>. I'd better remove that...", "alert-error");
+<%else%>  
+    // notify user
+    alert_user("<%= j(raw(exception.message)) %>", "alert-error");
+<%end%>
+
+// Close infowindow
+closeInfowindow();

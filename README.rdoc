@@ -1,0 +1,22 @@
+== README
+
+visit the demo itself http://gmaps-rails-demo.bytefilia.com/
+
+Requires rails version 4
+https://www.digitalocean.com/community/articles/how-to-install-ruby-on-rails-on-ubuntu-12-04-lts-precise-pangolin-with-rvm
+
+* After that you should instal node js
+
+sudo apt-get install nodejs
+
+* Install all the gems
+
+bundle install 
+
+* migrate the sqlite db
+
+rake db:migrate RAILS_ENV=development
+
+* compile assets
+
+bundle exec rake assets:precompile 

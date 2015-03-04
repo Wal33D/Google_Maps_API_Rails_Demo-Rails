@@ -1,0 +1,56 @@
+﻿<%= stylesheet_link_tag "gmaps4rails" %>
+
+<%= gmaps(:markers => {
+            :data => @json,        
+          }, 
+          :map_options => {
+            :do_clustering => false, 
+            :disableDoubleClickZoom => true,
+            :detect_location => true,       
+            :center_on_user  => true,        
+            :zoom => 6,
+            :auto_adjust => false
+          }
+) %>
+
+<%= content_for :scripts do %>
+    <script>
+        // Document ready stuff
+        $(document).ready(function() {
+            // Bizarre ajax errors
+            $(document).bind("ajaxError", function() {
+                alert_user('There was an error processing your request. Please try again later', 'alert-error');
+            });
+        });
+
+        // Instance geocoder
+        var geocoder = new google.maps.Geocoder();
+
+        // New marker beacon
+        var playgroundsNewMarker = null;
+
+        // Google maps map-related events
+        Gmaps.map.callback = function() {
+
+            // Double click event to show new marker form
+            google.maps.event.addListener(Gmaps.map.serviceObject, 'dblclick', function(event) {            
+    
+                // Remove previous marker when adding a new one
+                clearMarker(playgroundsNewMarker);
+    
+                // Geocode point. Callback on success will show the creation form
+                geocodePoint(event.latLng, function(data) {
+                   playgroundsNew(data);
+                });                
+            });
+        }; 
+    </script>
+<% end %>
+
+<% content_for :contextual do %>
+    <%=render :partial => 'home_side' %>
+<% end %>
+
+
+
+

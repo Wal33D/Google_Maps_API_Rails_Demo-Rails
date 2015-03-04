@@ -1,0 +1,40 @@
+<%if (@playground.errors.empty?) %>    
+
+    var updateMarkerWithInfowindow = function () { 
+
+        // Get marker
+        var marker_to_update = findById(<%=@playground.id%>);
+
+        // Newly updated infowindow behaviour
+        var showUpdatedInfowinow = function() {
+            openInfowindow(
+                "<%= j(render :template => 'playgrounds/show.html.erb', 
+                              :locals  => {:playground => @playground}) %>", 
+                marker_to_update
+            )
+        };
+
+        // Open the new window
+        showUpdatedInfowinow();
+
+        // Update click behaviour from now on to open this new infowindow
+        google.maps.event.addListener(marker_to_update, "click", function (e) {
+            showUpdatedInfowinow();
+        });     
+        
+        // Change the pane
+        $("#contextual-panel").html( "<%=j(render :partial => 'update_side') %>" );
+    
+        // Notify user    
+        alert_user("Yap! You updated it correctly","alert-info");
+    }
+    
+    // Invoke it
+    updateMarkerWithInfowindow();  
+      
+<%else%>
+
+    // Notify user
+    alert_user("Errr, well, I could not update that. <%= j(raw(@playground.errors.full_messages.join(','))) %>","alert-error");
+
+<%end%>

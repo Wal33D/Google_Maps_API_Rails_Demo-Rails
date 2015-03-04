@@ -1,0 +1,5 @@
+// Open the edit form
+openInfowindow(
+    "<%= j(render :template => 'playgrounds/edit.html.erb', :locals  => {:playground => @playground}) %>", 
+    findById(<%=@playground.id%>)
+);           

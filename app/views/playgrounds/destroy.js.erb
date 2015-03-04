@@ -1,0 +1,11 @@
+// Clear the marker itself
+clearMarkerById(<%=@playground.id%>);
+
+// Close infowindow
+closeInfowindow();
+
+// Change the pane
+$("#contextual-panel").html( "<%=j(render :partial => 'destroy_side') %>");
+
+// Notify
+alert_user("Destroyed a playground in tha neighborhood!", "alert-info");

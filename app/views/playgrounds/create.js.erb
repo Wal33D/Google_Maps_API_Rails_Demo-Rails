@@ -1,0 +1,54 @@
+<%if (@playground.errors.empty?) %>    
+    
+    var createMarkerWithInfoWindow = function () {
+    
+        // Remove previous marker
+        clearMarker(playgroundsNewMarker);
+
+        // Create marker info
+        var markerInfo = {    
+            position: new google.maps.LatLng(
+                    <%=@playground.latitude%>,
+                    <%=@playground.longitude%>
+            ), 
+            map: Gmaps.map.serviceObject,
+            id: <%=@playground.id%>
+        }
+            
+        // Create new marker
+        var marker = new google.maps.Marker(markerInfo);
+    
+        // Add marker serviceObject
+        markerInfo.serviceObject = marker;
+    
+        // Add to the markers array
+        Gmaps.map.markers.push(markerInfo);
+
+        // On click open infowindow
+        google.maps.event.addListener(marker, "click", function (e) {
+            openInfowindow(
+                "<%= j(render :template => 'playgrounds/show.html.erb', 
+                              :locals  => { :playground => @playground}) %>", 
+                marker
+            )
+        });
+        
+        // New pane content
+        $("#contextual-panel").html("<%=j(render :partial => 'create_side') %>");
+    
+    
+        // Notify user
+        alert_user("Got it. A new playground has been added!","alert-info");
+       
+    }    
+    
+    // Invoke it
+    createMarkerWithInfoWindow();
+    
+
+<%else%>
+
+    // Notify user
+    alert_user("Aj Got :(... I can't insert that. <%= j(raw(@playground.errors.full_messages.join(','))) %>", "alert-error");
+
+<%end%>
